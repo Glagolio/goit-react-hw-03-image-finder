@@ -1,7 +1,7 @@
 import ImageGalleryStyled from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGallertItem';
 
-const ImageGallery = ({ galleryList, onClickLoadMoreBtn }) => (
+const ImageGallery = ({ galleryList, onClick }) => (
   <>
     <ImageGalleryStyled>
       <ImageGalleryItem galleryList={galleryList} />
