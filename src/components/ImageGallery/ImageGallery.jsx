@@ -1,10 +1,10 @@
 import ImageGalleryStyled from './ImageGallery.styled';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGallertItem';
 
-const ImageGallery = ({ galleryList, onClick }) => (
+const ImageGallery = ({ galleryList, onClick, imageURL }) => (
   <>
     <ImageGalleryStyled>
-      <ImageGalleryItem galleryList={galleryList} />
+      <ImageGalleryItem galleryList={galleryList} onClick={onClick} imageURL={imageURL} />
     </ImageGalleryStyled>
   </>
 );

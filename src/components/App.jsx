@@ -5,7 +5,6 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 import { Component } from 'react';
-import Modal from './Modal/Modal';
 
 const KEY = '29141381-76438ddf2d97e3e41caa7b64b';
 
@@ -16,7 +15,7 @@ export class App extends Component {
     query: '',
     total: null,
     loading: false,
-    showModal: false,
+    imageURL: null,
   };
 
   componentDidUpdate(_, prevState) {
@@ -56,19 +55,26 @@ export class App extends Component {
     );
   };
 
+  onClickGalleryImage = imageURL => {
+    this.setState({ imageURL });
+  };
+
   render() {
+    const { gallery, imageURL, total } = this.state;
+
     return (
       <AppStyled>
         <Searchbar>
           <SearchForm onSubmit={this.handleSubmit} />
         </Searchbar>
-        {this.state.gallery.length > 0 && (
+        {gallery.length > 0 && (
           <>
             <ImageGallery
-              galleryList={this.state.gallery}
-              onClick={this.openModalGallery}
+              galleryList={gallery}
+              onClick={this.onClickGalleryImage}
+              imageURL={imageURL}
             />
-            {this.state.total !== this.state.gallery.length && (
+            {total !== gallery.length && (
               <Button text="Load more" onClick={this.handleLoadMoreBtn} />
             )}
           </>

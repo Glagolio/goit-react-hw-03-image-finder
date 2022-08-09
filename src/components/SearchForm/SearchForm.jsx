@@ -1,6 +1,7 @@
 import SearchFormStyled from './SearchForm.styled';
 import SearchFormInput from './SearchFormInput/SearchFormInput';
 import SearchFormButton from './SearchFormButton/SearchFormButton';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 class SearchForm extends Component {
@@ -31,3 +32,8 @@ class SearchForm extends Component {
 }
 
 export default SearchForm;
+
+SearchForm.propType = {
+  searchText: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};

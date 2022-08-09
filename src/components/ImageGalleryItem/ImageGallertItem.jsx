@@ -1,12 +1,12 @@
 import ImageGalleryItemStyled from './ImageGalleryItem.styled';
 import ImageGalleryItemImage from './ImageGalleryItemImage/ImageGalleryItemImage';
 import Modal from 'components/Modal/Modal';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 class ImageGalleryItem extends Component {
   state = {
     showModal: false,
-    largeImage: null,
   };
 
   showModal = () => {
@@ -22,14 +22,17 @@ class ImageGalleryItem extends Component {
   };
 
   render() {
+    const { galleryList } = this.props;
+
     return (
       <>
-        {this.props.galleryList.map(({ id, webformatURL, largeImageURL }) => {
+        {galleryList.map(({ id, webformatURL, largeImageURL }) => {
           return (
             <ImageGalleryItemStyled
               key={id}
               onClick={() => {
-                this.openGalleryItemModal(id);
+                this.props.onClick(largeImageURL);
+                this.showModal();
               }}
             >
               <ImageGalleryItemImage src={webformatURL} />
@@ -37,10 +40,20 @@ class ImageGalleryItem extends Component {
           );
         })}
         {this.state.showModal && (
-          <Modal src={this.state.largeImage} onClose={this.showModal} />
+          <Modal src={this.props.imageURL} onClose={this.showModal} />
         )}
       </>
     );
   }
 }
 export default ImageGalleryItem;
+
+ImageGalleryItem.propType = {
+  galleryList: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
+};
