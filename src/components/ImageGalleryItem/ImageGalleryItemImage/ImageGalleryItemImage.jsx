@@ -1,7 +1,7 @@
 import ImageGalleryItemImageStyled from './ImageGalleryItemImage.styled';
 
-const ImageGalleryItemImage = ({ image, alt }) => (
-  <ImageGalleryItemImageStyled src={image} alt={alt} />
+const ImageGalleryItemImage = ({ src, alt }) => (
+  <ImageGalleryItemImageStyled src={src} alt={alt} />
 );
 
 export default ImageGalleryItemImage;
