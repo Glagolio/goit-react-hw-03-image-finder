@@ -26,14 +26,19 @@ class ImageGalleryItem extends Component {
       <>
         {this.props.galleryList.map(({ id, webformatURL, largeImageURL }) => {
           return (
-            <>
-              <ImageGalleryItemStyled key={id} onClick={this.showModal}>
-                <ImageGalleryItemImage src={webformatURL} />
-              </ImageGalleryItemStyled>
-            </>
+            <ImageGalleryItemStyled
+              key={id}
+              onClick={() => {
+                this.openGalleryItemModal(id);
+              }}
+            >
+              <ImageGalleryItemImage src={webformatURL} />
+            </ImageGalleryItemStyled>
           );
         })}
-        {/* {this.state.showModal && <Modal src={this.state.largeImage} />} */}
+        {this.state.showModal && (
+          <Modal src={this.state.largeImage} onClose={this.showModal} />
+        )}
       </>
     );
   }
