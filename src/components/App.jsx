@@ -3,6 +3,7 @@ import Searchbar from './Searchbar/Searchbar';
 import SearchForm from './SearchForm/SearchForm';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
+import Loader from './Loader/Loader';
 import { Component } from 'react';
 
 const KEY = '29141381-76438ddf2d97e3e41caa7b64b';
@@ -13,7 +14,14 @@ export class App extends Component {
     page: 1,
     query: '',
     total: null,
+    loading: false,
   };
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.gallery !== this.state.gallery) {
+      this.setState({ loading: false });
+    }
+  }
 
   apiFetch = query =>
     fetch(
@@ -25,16 +33,19 @@ export class App extends Component {
       return;
     }
 
-    this.setState({ query });
+    this.setState({ query, loading: true });
 
     this.apiFetch(query).then(data =>
-      this.setState({ gallery: [...data.hits], total: data.totalHits })
+      this.setState({
+        gallery: [...data.hits],
+        total: data.totalHits,
+      })
     );
   };
 
   handleLoadMoreBtn = async () => {
     await this.setState(prevState => {
-      return { page: prevState.page + 1 };
+      return { page: prevState.page + 1, loading: true };
     });
     this.apiFetch(this.state.query).then(data =>
       this.setState(prevState => {
@@ -57,6 +68,7 @@ export class App extends Component {
             )}
           </>
         )}
+        {this.state.loading && <Loader />}
       </AppStyled>
     );
   }
