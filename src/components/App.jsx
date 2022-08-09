@@ -1,16 +1,18 @@
+import AppStyled from './App.styled';
+import Searchbar from './Searchbar/Searchbar';
+import SearchForm from './SearchForm/SearchForm';
+import ImageGallery from './ImageGallery/ImageGallery';
+import ImageGalleryItem from './ImageGalleryItem/ImageGallertItem';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <AppStyled>
+      <Searchbar>
+        <SearchForm />
+      </Searchbar>
+      <ImageGallery>
+        <ImageGalleryItem />
+      </ImageGallery>
+    </AppStyled>
   );
 };
