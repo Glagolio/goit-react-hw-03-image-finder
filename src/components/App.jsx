@@ -4,6 +4,7 @@ import SearchForm from './SearchForm/SearchForm';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
+import getImage from '../services/getImage';
 import { Component } from 'react';
 
 const KEY = '29141381-76438ddf2d97e3e41caa7b64b';
@@ -24,10 +25,10 @@ export class App extends Component {
     }
   }
 
-  apiFetch = query =>
-    fetch(
-      `https://pixabay.com/api/?q=${query}&page=${this.state.page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
-    ).then(responce => responce.json());
+  // apiFetch = query =>
+  //   fetch(
+  //     `https://pixabay.com/api/?q=${query}&page=${this.state.page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
+  //   ).then(responce => responce.json());
 
   handleSubmit = query => {
     if (query.trim().length === 0) {
@@ -36,7 +37,7 @@ export class App extends Component {
 
     this.setState({ query, loading: true });
 
-    this.apiFetch(query).then(data =>
+    getImage(query, this.state.page).then(data =>
       this.setState({
         gallery: [...data.hits],
         total: data.totalHits,
@@ -48,7 +49,7 @@ export class App extends Component {
     await this.setState(prevState => {
       return { page: prevState.page + 1, loading: true };
     });
-    this.apiFetch(this.state.query).then(data =>
+    getImage(this.state.query, this.state.page).then(data =>
       this.setState(prevState => {
         return { gallery: [...prevState.gallery, ...data.hits] };
       })
