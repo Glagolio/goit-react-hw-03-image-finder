@@ -7,8 +7,6 @@ import Loader from './Loader/Loader';
 import getImage from '../services/getImage';
 import { Component } from 'react';
 
-const KEY = '29141381-76438ddf2d97e3e41caa7b64b';
-
 export class App extends Component {
   state = {
     gallery: [],
