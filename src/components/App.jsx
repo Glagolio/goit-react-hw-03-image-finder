@@ -25,11 +25,6 @@ export class App extends Component {
     }
   }
 
-  // apiFetch = query =>
-  //   fetch(
-  //     `https://pixabay.com/api/?q=${query}&page=${this.state.page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`
-  //   ).then(responce => responce.json());
-
   handleSubmit = query => {
     if (query.trim().length === 0) {
       return;
